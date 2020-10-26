@@ -1,4 +1,4 @@
-! python tapas/tapas/run_task_main.py \
+! python tapas/run_task_main.py \
   --task="SQA" \
   --input_dir="data" \
   --output_dir="results" \
