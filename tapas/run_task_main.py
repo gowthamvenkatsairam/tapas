@@ -14,15 +14,15 @@
 # limitations under the License.
 # Lint as: python3
 """Script for creating TF examples, training and evaluation."""
-from logger import MLFlowLogger as MlLogger
+import sys
+sys.path.append("/root/tapas")
 import enum
 import functools
 import os
 import random
 import time
 from typing import Text, Optional
-import sys
-sys.path.append("/root/tapas")
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -339,10 +339,9 @@ def _train_and_predict(
     model_dir,
     loop_predict,
 ):
-
-
   """Trains, produces test predictions and eval metric."""
   file_utils.make_directories(model_dir)
+
   if task == tasks.Task.SQA:
     num_aggregation_labels = 0
     num_classification_labels = 0

@@ -45,7 +45,7 @@ def get_hparams(task):
     return {
         'init_cell_selection_weights_to_zero': False,
         'learning_rate': 5e-5 * (128 / 512),
-        'num_train_examples': 1000,
+        'num_train_examples': 105,
         'select_one_column': True,
         'allow_empty_column_selection': False,
         'train_batch_size': 128,

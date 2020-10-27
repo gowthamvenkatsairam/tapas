@@ -975,13 +975,14 @@ def model_fn_builder(config):
           config.num_train_steps,
           config.num_warmup_steps,
           config.use_tpu,
-          gradient_accumulation_steps=params.get("gradient_accumulation_steps",
-                                                 1),
+          gradient_accumulation_steps=params.get("gradient_accumulation_steps",1),
           grad_clipping=config.grad_clipping)
+      logging_hook = tf.train.LoggingTensorHook({"loss": total_loss}, every_n_iter=1)
       output_spec = tf.estimator.tpu.TPUEstimatorSpec(
           mode=mode,
           loss=total_loss,
           train_op=train_op,
+          training_hooks=[logging_hook],
           scaffold_fn=scaffold_fn)
     elif mode == tf.estimator.ModeKeys.EVAL:
       eval_metrics = (
