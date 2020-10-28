@@ -10,6 +10,7 @@ import shutil
 import csv
 import pandas as pd
 import IPython
+import csv
 
 max_seq_length = 512
 vocab_file = "tapas_sqa_base/vocab.txt"
@@ -54,8 +55,7 @@ def predict(table_data, queries):
   examples
   write_tf_example("results/sqa/tf_examples/test.tfrecord", examples)
   write_tf_example("results/sqa/tf_examples/random-split-1-dev.tfrecord", [])
-  leng=len(queries)
-  subprocess.call(["bash", "get_checkpoint.sh",len(queries)])
+  subprocess.call(["bash", "get_checkpoint.sh",str(len(queries))])
   results_path = "results/sqa/model/test_sequence.tsv"
   all_coordinates = []
   with open(results_path) as csvfile:
@@ -68,3 +68,15 @@ def predict(table_data, queries):
       print(">", queries[position])
       print(answers)
   return all_coordinates
+
+
+file = []
+with open("balancesheet.csv") as csvfile:
+    reader = csv.reader(csvfile) # change contents to floats
+    for row in reader: # each row is a list
+        file.append(row)
+with open('questions.txt') as querylist:
+    queryarray = querylist.read().splitlines()
+
+result=predict(file,queryarray)
+print(result)

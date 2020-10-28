@@ -4,3 +4,5 @@ tapas_sqa_base.zip
 ckpoints/
 data/
 **/__pycache__/
+balancesheet.csv
+questions.txt
